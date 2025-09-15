@@ -1,5 +1,6 @@
 package com.xen.camaya.entity;
 
+
 import javax.persistence.*;
 
 @Entity
