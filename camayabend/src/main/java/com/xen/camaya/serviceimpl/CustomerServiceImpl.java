@@ -7,6 +7,7 @@ import com.xen.camaya.service.CustomerService;
 import com.xen.camaya.transform.TransformCustomerServ;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
@@ -41,11 +42,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerModel> getAll() {
-        return ((List<CustomerData>) customerRepository.findAll())
-                .stream()
-                .map(transform::toModel)
-                .collect(Collectors.toList());
+        CustomerModel c1 = new CustomerModel();
+        c1.setId(1);
+        c1.setCustomerName("John Doe");
+        c1.setCustomerEmail("john@example.com");
+
+        CustomerModel c2 = new CustomerModel();
+        c2.setId(2);
+        c2.setCustomerName("Jane Smith");
+        c2.setCustomerEmail("jane@example.com");
+
+        return Arrays.asList(c1, c2);
     }
+
 
     @Override
     public void delete(Integer id) {
