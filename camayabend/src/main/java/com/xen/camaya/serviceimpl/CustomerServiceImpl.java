@@ -51,7 +51,6 @@ public class CustomerServiceImpl implements CustomerService {
         c2.setId(2);
         c2.setCustomerName("Jane Smith");
         c2.setCustomerEmail("jane@example.com");
-
         return Arrays.asList(c1, c2);
     }
 
