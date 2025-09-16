@@ -1,14 +1,27 @@
 package com.xen.camaya.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xen.camaya.model.CustomerModel;
+import com.xen.camaya.service.CrudService;
+import com.xen.camaya.service.CustomerService;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CustomerController {
-    Logger logger = LoggerFactory.getLogger(CustomerController.class);
-    @Autowired
-    private CustomerService customerService;
+@RequestMapping("/api/customer")
+public class CustomerController extends BaseController<CustomerModel, Integer> {
+    private final CustomerService customerService;
 
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    @Override
+    protected String getResourceName() {
+        return "customer";
+    }
+
+    @Override
+    protected CrudService<CustomerModel, Integer> getService() {
+        return customerService;
+    }
 }

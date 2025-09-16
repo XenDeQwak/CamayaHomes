@@ -10,6 +10,6 @@ public class HouseModel {
 
     @Override
     public String toString() {
-        return houseName + houseLocation;
+        return houseName;
     }
 }

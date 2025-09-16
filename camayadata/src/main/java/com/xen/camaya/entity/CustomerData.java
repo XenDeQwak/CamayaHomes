@@ -1,8 +1,11 @@
 package com.xen.camaya.entity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "CustomerTable")
 
@@ -12,5 +15,6 @@ public class CustomerData {
     int id;
     String customerName;
     String customerEmail;
+    String houseName;
     int customerContactNo;
 }

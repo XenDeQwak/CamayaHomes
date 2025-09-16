@@ -7,10 +7,11 @@ public class CustomerModel {
     int id;
     String customerName;
     String customerEmail;
+    String houseName;
     int customerContactNo;
 
     @Override
     public String toString() {
-        return customerName + customerEmail + customerContactNo;
+        return customerName;
     }
 }
