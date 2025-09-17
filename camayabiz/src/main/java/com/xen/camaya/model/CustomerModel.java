@@ -8,7 +8,7 @@ public class CustomerModel {
     String customerName;
     String customerEmail;
     String houseName;
-    int customerContactNo;
+    String customerContactNo;
 
     @Override
     public String toString() {

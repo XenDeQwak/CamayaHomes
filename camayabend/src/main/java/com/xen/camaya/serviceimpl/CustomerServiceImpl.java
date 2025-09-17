@@ -7,56 +7,54 @@ import com.xen.camaya.service.CustomerService;
 import com.xen.camaya.transform.TransformCustomerServ;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
+    private final List<CustomerModel> customers = new ArrayList<>();
+    private final TransformCustomerServ transformCustomerServ;
     private final CustomerRepository customerRepository;
-    private final TransformCustomerServ transform;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, TransformCustomerServ transform) {
+    public CustomerServiceImpl(CustomerRepository customerRepository,
+                               TransformCustomerServ transformCustomerServ) {
         this.customerRepository = customerRepository;
-        this.transform = transform;
+        this.transformCustomerServ = transformCustomerServ;
     }
 
     @Override
-    public CustomerModel create(CustomerModel entity) {
-        CustomerData saved = customerRepository.save(transform.toEntity(entity));
-        return transform.toModel(saved);
-    }
-
-    @Override
-    public CustomerModel update(CustomerModel entity) {
-        CustomerData saved = customerRepository.save(transform.toEntity(entity));
-        return transform.toModel(saved);
-    }
-
-    @Override
-    public CustomerModel get(Integer id) {
-        Optional<CustomerData> data = customerRepository.findById(id);
-        return data.map(transform::toModel).orElse(null);
+    public CustomerModel create(CustomerModel customerModel) {
+        CustomerData entity = transformCustomerServ.toEntity(customerModel);
+        CustomerData saved = customerRepository.save(entity);
+        return transformCustomerServ.toModel(saved);
     }
 
     @Override
     public List<CustomerModel> getAll() {
-        CustomerModel c1 = new CustomerModel();
-        c1.setId(1);
-        c1.setCustomerName("John Doe");
-        c1.setCustomerEmail("john@example.com");
+        List<CustomerData> entities = (List<CustomerData>) customerRepository.findAll();
+        List<CustomerModel> models = new ArrayList<>();
+        for (CustomerData entity : entities) {
+            models.add(transformCustomerServ.toModel(entity));
+        }
+        return models;
+    }
 
-        CustomerModel c2 = new CustomerModel();
-        c2.setId(2);
-        c2.setCustomerName("Jane Smith");
-        c2.setCustomerEmail("jane@example.com");
-        return Arrays.asList(c1, c2);
+    @Override
+    public CustomerModel get(Integer id) {
+        return customerRepository.findById(id)
+                .map(transformCustomerServ::toModel)
+                .orElse(null);
     }
 
 
     @Override
+    public CustomerModel update(CustomerModel entity) {
+        return entity;
+    }
+
+    @Override
     public void delete(Integer id) {
-        customerRepository.deleteById(id);
+        customers.removeIf(c -> c.getId() == id);
     }
 }
