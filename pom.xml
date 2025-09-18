@@ -16,7 +16,6 @@
   <modules>
     <module>camayabend</module>
     <module>camayadata</module>
-    <module>camaya</module>
     <module>camayabiz</module>
   </modules>
   <version>1.0-SNAPSHOT</version>

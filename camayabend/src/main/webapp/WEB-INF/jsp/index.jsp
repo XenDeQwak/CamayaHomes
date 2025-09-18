@@ -17,9 +17,11 @@
 <form action="add-customer" method="post">
     Name: <input type="text" name="customerName" required><br>
     Email: <input type="email" name="customerEmail" required><br>
+    Password; <input type="password" name="customerPassword" required><br>
     Contact Number: <input type="number" name="customerContactNo" required><br>
+
     <input type="submit" value="Add Customer">
 </form>
-
+<a href="${pageContext.request.contextPath}/login">Login</a>
 </body>
 </html>

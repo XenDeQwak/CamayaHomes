@@ -31,4 +31,9 @@ public class HomeController {
         customerService.create(newCustomer);
         return "redirect:/";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 }

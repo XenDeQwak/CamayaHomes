@@ -16,7 +16,7 @@ public class CustomerData {
     String customerName;
     String customerEmail;
     String houseName;
-
+    String customerPassword;
     @Column(length=11)
     String customerContactNo;
 }

@@ -7,6 +7,7 @@ public class CustomerModel {
     int id;
     String customerName;
     String customerEmail;
+    String customerPassword;
     String houseName;
     String customerContactNo;
 
