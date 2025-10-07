@@ -1,0 +1,9 @@
+<h2>Signup</h2>
+<input [(ngModel)]="newCustomer.customerName" placeholder="Name" />
+<input [(ngModel)]="newCustomer.customerEmail" placeholder="Email" />
+<input [(ngModel)]="newCustomer.customerPassword" type="password" placeholder="Password" />
+
+<button (click)="signup()">Signup</button>
+
+<p *ngIf="signupSuccess">Signup successful!</p>
+<p *ngIf="signupFailed">Signup failed. Try again.</p>

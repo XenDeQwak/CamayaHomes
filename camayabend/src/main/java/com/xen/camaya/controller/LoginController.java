@@ -2,13 +2,16 @@ package com.xen.camaya.controller;
 
 import com.xen.camaya.entity.CustomerData;
 import com.xen.camaya.repository.CustomerRepository;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/auth")
 public class LoginController {
     private final CustomerRepository customerRepository;
 
@@ -16,21 +19,21 @@ public class LoginController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/login")
-    public String showLogin() {
-        return "login";
-    }
-
     @PostMapping("/login")
-    public String doLogin(@RequestParam String customerEmail,
-                          @RequestParam String customerPassword,
-                          Model model) {
-        CustomerData user = customerRepository.findByCustomerEmailAndCustomerPassword(customerEmail, customerPassword);
+    public Map<String, Object> login(@RequestBody Map<String, String> payload) {
+        String email = payload.get("customerEmail");
+        String password = payload.get("customerPassword");
+        
+        CustomerData user = customerRepository.findByCustomerEmailAndCustomerPassword(email, password);
+
         if (user != null) {
-            return "redirect:/test";
+            return Map.of(
+                "success", true,
+                "customerName", user.getCustomerName()
+            );
         } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
+            return Map.of("success", false, 
+            "message", "Invalid email or password");
         }
     }
 }
