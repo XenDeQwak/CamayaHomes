@@ -8,7 +8,6 @@ public class CustomerModel {
     String customerName;
     String customerEmail;
     String customerPassword;
-    String houseName;
     String customerContactNo;
 
     @Override
