@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  template: './html/login.html',
+  templateUrl: '../html/login.html',
   styleUrl: '../css/login.component.css',
   imports: [CommonModule, FormsModule]
 })
+
 export class LoginComponent implements OnInit {
   customers: Customer[] = [];
   email = '';

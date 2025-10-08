@@ -1,9 +1,13 @@
 <h2>Signup</h2>
 <input [(ngModel)]="newCustomer.customerName" placeholder="Name" />
+<br>
 <input [(ngModel)]="newCustomer.customerEmail" placeholder="Email" />
+<br>
 <input [(ngModel)]="newCustomer.customerPassword" type="password" placeholder="Password" />
-
+<br>
+<input [(ngModel)]="newCustomer.customerContactNo" type="text" placeholder="Contact Number"/>
+<br>
 <button (click)="signup()">Signup</button>
 
-<p *ngIf="signupSuccess">Signup successful!</p>
-<p *ngIf="signupFailed">Signup failed. Try again.</p>
+<p *ngIf="success">Signup successful!</p>
+<p *ngIf="failed">Signup failed. Try again.</p>

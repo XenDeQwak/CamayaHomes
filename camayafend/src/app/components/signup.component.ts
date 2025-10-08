@@ -5,7 +5,7 @@ import { CustomerService, Customer } from '../services/customer.service';
 
 @Component({
     selector: 'app-signup',
-    template: './html/signup.html',
+    templateUrl: '../html/signup.html',
     standalone: true,
     imports: [CommonModule, FormsModule]
     
@@ -23,7 +23,7 @@ export class SignupComponent {
 
     constructor(private customerService: CustomerService) {}
 
-    login() {
+    signup() {
         this.customerService.createCustomer(this.newCustomer).subscribe({
             next: res => {
                 this.success = true;
