@@ -1,4 +1,4 @@
-package com.xen.camaya.controller;
+package com.xen.camaya.controller.internal_controllers;
 
 import com.xen.camaya.entity.CustomerData;
 import com.xen.camaya.repository.CustomerRepository;

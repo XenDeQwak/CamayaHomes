@@ -4,7 +4,6 @@
 <input type="password" [(ngModel)]="password" placeholder="Password">
 <button (click)="login()">Login</button>
 
-<p *ngIf="loginSuccess">Login successful!</p>
-<p *ngIf="loginFailed">Invalid email or password</p>
+<p *ngIf="!loginSuccess && email && password">Invalid email or password</p>
 <br>
 <a href="/signup">Go to Signup</a>

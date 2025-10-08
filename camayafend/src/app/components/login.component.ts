@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../services/auth.service';
 import { CustomerService, Customer } from '../services/customer.service';
 import { FormsModule } from '@angular/forms';
@@ -11,17 +12,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: '../css/login.component.css',
   imports: [CommonModule, FormsModule]
 })
-
 export class LoginComponent implements OnInit {
   customers: Customer[] = [];
   email = '';
   password = '';
   loginSuccess = false;
-  loginFailed = false;
 
   constructor(
     private customerService: CustomerService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,11 +34,13 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.loginSuccess = res.success;
-          this.loginFailed = !res.success;
+
+          if (this.loginSuccess) {
+            this.router.navigate(['/home']);
+          }
         },
         error: () => {
           this.loginSuccess = false;
-          this.loginFailed = true;
         }
       });
   }
