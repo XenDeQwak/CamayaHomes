@@ -3,7 +3,6 @@ package com.xen.camaya.controller.internal_controllers;
 import com.xen.camaya.service.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ public abstract class BaseController<T, ID> {
 
     @GetMapping
     public ResponseEntity<?> list() {
-        HttpHeaders headers = new HttpHeaders();
         try {
             List<T> entities = getService().getAll();
             return ResponseEntity.ok(entities);
