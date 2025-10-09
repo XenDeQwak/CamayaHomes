@@ -11,7 +11,6 @@ import java.util.List;
 
 public abstract class BaseController<T, ID> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-
     protected abstract String getResourceName();
     protected abstract CrudService<T, ID> getService();
 

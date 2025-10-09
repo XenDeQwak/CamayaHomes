@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
   loginSuccess = false;
+  loginAttempted = false;
 
   constructor(
     private customerService: CustomerService,
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loginAttempted = true
     this.loginService.login(this.email, this.password)
       .subscribe({
         next: (res) => {
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: () => {
-          this.loginSuccess = false;
+          this.loginSuccess = false
         }
       });
   }
