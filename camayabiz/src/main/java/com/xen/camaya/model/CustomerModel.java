@@ -9,9 +9,4 @@ public class CustomerModel {
     String customerEmail;
     String customerPassword;
     String customerContactNo;
-
-    @Override
-    public String toString() {
-        return customerName;
-    }
 }
