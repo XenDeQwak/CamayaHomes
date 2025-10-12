@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { CustomerService, Customer } from '../services/customer.service';
+import { UserService, User } from '../services/user.service';
 
 @Component({
     selector: 'app-signup',
@@ -11,20 +11,20 @@ import { CustomerService, Customer } from '../services/customer.service';
     
 })
 export class SignupComponent {
-    newCustomer: Customer = {
+    newUser: User = {
         id: 0,
-        customerName: '',
-        customerEmail: '',
-        customerPassword: '',
-        customerContactNo: ''
+        name: '',
+        email: '',
+        password: '',
+        role: ''
     }
     success = false;
     failed = false;
 
-    constructor(private customerService: CustomerService) {}
+    constructor(private userService: UserService) {}
 
     signup() {
-        this.customerService.createCustomer(this.newCustomer).subscribe({
+        this.userService.createUser(this.newUser).subscribe({
             next: res => {
                 this.success = true;
                 this.failed = false;

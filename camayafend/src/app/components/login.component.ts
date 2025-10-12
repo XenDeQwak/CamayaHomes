@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/auth.service';
-import { CustomerService, Customer } from '../services/customer.service';
+import { UserService, User } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -13,21 +13,21 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, FormsModule]
 })
 export class LoginComponent implements OnInit {
-  customers: Customer[] = [];
+  users: User[] = [];
   email = '';
   password = '';
   loginSuccess = false;
   loginAttempted = false;
 
   constructor(
-    private customerService: CustomerService,
+    private userService: UserService,
     private loginService: LoginService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.customerService.getCustomers()
-      .subscribe(data => this.customers = data);
+    this.userService.getUsers()
+      .subscribe(data => this.users = data);
   }
 
   login() {
@@ -35,10 +35,14 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.email, this.password)
       .subscribe({
         next: (res) => {
-          this.loginSuccess = res.success;
-
-          if (this.loginSuccess) {
-            this.router.navigate(['/home']);
+          if (res.success) {
+            if (res.role === 'admin') {
+              this.router.navigate(['/admin']);
+            } else if (res.role === 'customer') {
+              this.router.navigate(['/home']);
+            }
+          } else {
+            this.loginSuccess = false;
           }
         },
         error: () => {

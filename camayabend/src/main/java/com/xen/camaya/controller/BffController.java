@@ -12,7 +12,7 @@ import com.xen.camaya.model.UserModel;
 import com.xen.camaya.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class BffController {
     
     private final UserService userService;

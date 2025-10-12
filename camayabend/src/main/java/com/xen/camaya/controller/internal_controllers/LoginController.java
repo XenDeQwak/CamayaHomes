@@ -23,17 +23,21 @@ public class LoginController {
     public Map<String, Object> login(@RequestBody Map<String, String> payload) {
         String email = payload.get("email");
         String password = payload.get("password");
-        
-        UserData user = userRepository.findByEmailAndPassword(email, password);
 
-        if (user.getRole().equals("admin")) {
+        UserData user = userRepository.findByEmailAndPassword(email, password);
+        if (user == null) {
             return Map.of(
-                "success", true,
-                "userRole", user.getRole()
+                "success", false,
+                "message", "Invalid email or password"
             );
-        } else {
-            return Map.of("success", false, 
-            "message", "user is customer");
         }
+
+        return Map.of(
+            "role", user.getRole(),
+            "success", true,
+            "userName", user.getName(),
+            "message", "Hello World!"
+        );
     }
+
 }
