@@ -1,7 +1,7 @@
 package com.xen.camaya.controller.internal_controllers;
 
-import com.xen.camaya.entity.CustomerData;
-import com.xen.camaya.repository.CustomerRepository;
+import com.xen.camaya.entity.UserData;
+import com.xen.camaya.repository.UserRepository;
 
 import java.util.Map;
 
@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 public class LoginController {
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
-    public LoginController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody Map<String, String> payload) {
-        String email = payload.get("customerEmail");
-        String password = payload.get("customerPassword");
+        String email = payload.get("email");
+        String password = payload.get("password");
         
-        CustomerData user = customerRepository.findByCustomerEmailAndCustomerPassword(email, password);
+        UserData user = userRepository.findByEmailAndPassword(email, password);
 
-        if (user != null) {
+        if (user.getRole().equals("admin")) {
             return Map.of(
                 "success", true,
-                "customerName", user.getCustomerName()
+                "userRole", user.getRole()
             );
         } else {
             return Map.of("success", false, 
-            "message", "Invalid email or password");
+            "message", "user is customer");
         }
     }
 }

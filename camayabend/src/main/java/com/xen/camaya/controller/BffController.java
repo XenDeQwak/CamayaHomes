@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xen.camaya.model.CustomerModel;
-import com.xen.camaya.service.CustomerService;
+import com.xen.camaya.model.UserModel;
+import com.xen.camaya.service.UserService;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/user")
 public class BffController {
     
-    private final CustomerService customerService;
+    private final UserService userService;
 
-    public BffController(CustomerService customerService) {
-        this.customerService = customerService;
+    public BffController(UserService userService) {
+        this.userService = userService;
     }
     
     @GetMapping
-    public List<CustomerModel> getAllCustomers() {
-        return customerService.getAll();
+    public List<UserModel> getAllUsers() {
+        return userService.getAll();
     }
 
     @PostMapping
-    public CustomerModel createCustomer(@RequestBody CustomerModel customer) {
-        return customerService.create(customer);
+    public UserModel createUser(@RequestBody UserModel user) {
+        return userService.create(user);
     }
     
 }
