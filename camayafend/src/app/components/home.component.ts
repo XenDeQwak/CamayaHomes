@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { User, UserService } from "../services/user.service";
 
 @Component({
     selector: 'app-home',
@@ -9,5 +10,37 @@ import { FormsModule } from "@angular/forms";
     imports: [CommonModule, FormsModule]
     
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+    users: User[] = []
+    currentUser?: User
+    selectedAdminId?: number
+    success = false
+    failed = false
+
+    constructor(
+        private userService: UserService
+    ) {}
+
+    ngOnInit() {
+        this.userService.getUsers().subscribe(data => 
+            this.users = data.filter(u => u.role === "admin"))
+        this.currentUser = this.userService.getCurrentUser()
+    }
+
+    link() {
+        if(!this.currentUser || !this.selectedAdminId) return
+        this.userService.linkToAdmin(this.currentUser.id!, this.selectedAdminId).subscribe({
+            next: () => {
+                this.success = true
+                alert('Linked successfully')
+            },
+            error: err => {
+                this.failed = true
+                console.error(err)
+            }
+        })
+    }
+
+
+}
 

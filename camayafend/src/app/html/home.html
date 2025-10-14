@@ -1,1 +1,10 @@
-<h1>HELLO YOU ARE AT HOMEPAGE</h1>
+<h2>Available Admins</h2>
+  <select [(ngModel)]="selectedAdminId">
+    <option *ngFor="let admin of users" [value]="admin.id">
+      {{ admin.name }}
+    </option>
+  </select>
+
+<button (click)="link()">Link to this Admin</button>
+<p *ngIf="success">Linked successfully</p>
+<p *ngIf="failed">Link failed</p>
