@@ -10,4 +10,5 @@ public interface UserService extends CrudService<UserModel, Integer> {
     UserModel create(UserModel userModel);
     UserModel update(UserModel userModel);
     void delete(Integer id);
+    boolean assign(Integer userId, Integer adminId);
 }

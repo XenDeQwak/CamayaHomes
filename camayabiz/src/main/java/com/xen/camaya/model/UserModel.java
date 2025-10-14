@@ -9,4 +9,5 @@ public class UserModel {
     String email;
     String password;
     String role;
+    Integer adminId;
 }

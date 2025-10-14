@@ -28,6 +28,18 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
         return transformUserServ.toModel(userData);
     }
 
+    @Override
+    public boolean assign(Integer userId, Integer adminId) {
+        UserData user = repository.findById(userId).orElse(null);
+        UserData admin = repository.findById(adminId).orElse(null);
+
+        if (user == null || admin == null) return false;
+
+        user.setAdminId(adminId);
+        repository.save(user);
+        return true;
+    }
+
     
 
 }
