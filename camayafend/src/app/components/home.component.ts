@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-home',
-    templateUrl: '../html/index.html',
+    templateUrl: '../html/home.html',
     standalone: true,
     imports: [CommonModule, FormsModule]
     
