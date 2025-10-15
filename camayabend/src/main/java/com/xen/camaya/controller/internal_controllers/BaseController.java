@@ -48,17 +48,6 @@ public abstract class BaseController<T, ID> {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
     }
-    
-    @PostMapping("/{userId}/assign/{adminId}")
-    public ResponseEntity<?> assignAdmin(@PathVariable ID userId, @PathVariable ID adminId) {
-        try {
-            boolean success = getService().assign(userId, adminId);
-            if (!success) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Assignment failed");
-            return ResponseEntity.ok("Assignment success");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody T entity) {

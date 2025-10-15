@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     selectedAdminId?: number
     success = false
     failed = false
+    linked = false
 
     constructor(
         private userService: UserService
@@ -24,12 +25,20 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.userService.getUsers().subscribe(data => 
             this.users = data.filter(u => u.role === "admin"))
+            
         this.currentUser = this.userService.getCurrentUser()
     }
 
     link() {
+        console.log('Current user:', this.currentUser)
         if(!this.currentUser || !this.selectedAdminId) return
-        this.userService.linkToAdmin(this.currentUser.id!, this.selectedAdminId).subscribe({
+
+        if (this.currentUser.adminId) {
+            alert("Already linked to an admin")
+            return
+        }
+
+        this.userService.linkToAdmin(this.currentUser?.id, this.selectedAdminId).subscribe({
             next: () => {
                 this.success = true
                 alert('Linked successfully')

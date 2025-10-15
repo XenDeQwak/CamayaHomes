@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface User {
-  id?: number;
+  id?: number
   name: string
   email: string
   password: string
   role: string
+  adminId?: number
 }
 
 
@@ -40,7 +41,7 @@ export class UserService {
       return this.http.delete<void>(`${this.url}/${id}`);
     }
 
-    linkToAdmin(userId: number, adminId: number | undefined): Observable<any> {
+    linkToAdmin(userId: number | undefined, adminId: number | undefined): Observable<any> {
       return this.http.post(`${this.url}/${userId}/assign/${adminId}`, {})
     }
 

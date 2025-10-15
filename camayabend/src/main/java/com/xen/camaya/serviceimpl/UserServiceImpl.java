@@ -34,6 +34,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
         UserData admin = repository.findById(adminId).orElse(null);
 
         if (user == null || admin == null) return false;
+        if (!"admin".equals(admin.getRole())) return false;
 
         user.setAdminId(adminId);
         repository.save(user);

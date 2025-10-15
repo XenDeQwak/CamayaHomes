@@ -32,24 +32,19 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginAttempted = true
     this.loginService.login(this.email, this.password).subscribe({
-      next: (res: any) => {
+      next: (res) => {
         if (res.success) {
-          const user: User = {
-            id: res.id,
-            name: res.name,
-            email: res.email,
-            password: '',
-            role: res.role
-          }
-
-          this.userService.setCurrentUser(user)
-          this.loginSuccess = true
-
-          if (res.role === 'admin') {
-            this.router.navigate(['/admin'])
-          } else if (res.role === 'customer') {
-            this.router.navigate(['/home'])
-          }
+          this.userService.getUsers().subscribe(users => {
+            const matched = users.find(u => u.email === this.email)
+            if (matched) {
+              this.userService.setCurrentUser(matched)
+              if (matched.role === 'admin') {
+                this.router.navigate(['/admin'])
+              } else if (matched.role === 'customer') {
+                this.router.navigate(['/home'])
+              }
+            }
+          })
         } else {
           this.loginSuccess = false
         }
@@ -58,5 +53,6 @@ export class LoginComponent implements OnInit {
         this.loginSuccess = false
       }
     })
-  }
+}
+
 }
