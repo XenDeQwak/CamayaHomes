@@ -1,5 +1,7 @@
 package com.xen.camaya.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.xen.camaya.entity.UserData;
@@ -12,9 +14,11 @@ import com.xen.camaya.transform.TransformUserServ;
 public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Integer> implements UserService {
 
     private final TransformUserServ transformUserServ;
+    private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository repository, TransformUserServ transformUserServ) {
-        super(repository);
+    public UserServiceImpl(UserRepository userRepository, TransformUserServ transformUserServ) {
+        super(userRepository);
+        this.userRepository = userRepository;
         this.transformUserServ = transformUserServ;
     }
 
@@ -30,16 +34,25 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
 
     @Override
     public boolean assign(Integer userId, Integer adminId) {
-        UserData user = repository.findById(userId).orElse(null);
-        UserData admin = repository.findById(adminId).orElse(null);
+        UserData user = userRepository.findById(userId).orElse(null);
+        UserData admin = userRepository.findById(adminId).orElse(null);
 
         if (user == null || admin == null) return false;
         if (!"admin".equals(admin.getRole())) return false;
 
         user.setAdminId(adminId);
-        repository.save(user);
+        userRepository.save(user);
         return true;
     }
+
+    @Override
+    public List<UserModel> getLinkedCustomers(Integer adminId) {
+        return userRepository.findByAdminId(adminId)
+            .stream()
+            .map(transformUserServ::toModel)
+            .toList();
+    }
+
 
     
 

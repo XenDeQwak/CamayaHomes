@@ -1,1 +1,7 @@
-<h1>YOU ARE AT ADMIN NOIW</h1>
+<h1>YOU ARE AT ADMIN NOW</h1>
+<h2>Your Linked Customers</h2>
+<ul>
+  <li *ngFor="let c of linkedCustomers">
+    {{ c.name }} ({{ c.email }})
+  </li>
+</ul>

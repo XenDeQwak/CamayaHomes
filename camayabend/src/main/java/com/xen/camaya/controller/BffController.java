@@ -2,7 +2,6 @@ package com.xen.camaya.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +40,13 @@ public class BffController {
         String internalUrl = "http://localhost:8080/internal/users/" + userId + "/assign/" + adminId;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(internalUrl, null, String.class);
+    }
+
+    @GetMapping("/linked/{adminId}")
+    public ResponseEntity<?> getLinkedCustomers(@PathVariable Integer adminId) {
+        String internalUrl = "http://localhost:8080/internal/users/linked/" + adminId;
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForEntity(internalUrl, Object.class);
     }
 
     

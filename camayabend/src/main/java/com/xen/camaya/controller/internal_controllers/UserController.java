@@ -1,7 +1,10 @@
 package com.xen.camaya.controller.internal_controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +45,16 @@ public class UserController extends BaseController<UserModel, Integer> {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+    @GetMapping("/linked/{adminId}")
+    public ResponseEntity<?> getLinkedCustomers(@PathVariable Integer adminId) {
+        try {
+            List<UserModel> linked = userService.getLinkedCustomers(adminId);
+            return ResponseEntity.ok(linked);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
 
 }

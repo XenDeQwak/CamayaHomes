@@ -11,4 +11,5 @@ public interface UserService extends CrudService<UserModel, Integer> {
     UserModel update(UserModel userModel);
     void delete(Integer id);
     boolean assign(Integer userId, Integer adminId);
+    List<UserModel> getLinkedCustomers(Integer adminId);
 }

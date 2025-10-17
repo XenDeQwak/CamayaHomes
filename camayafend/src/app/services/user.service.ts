@@ -63,4 +63,8 @@ export class UserService {
       this.currentUser = undefined
       localStorage.removeItem('user')
     }
+
+    getLinkedCustomers(adminId: number): Observable<User[]> {
+      return this.http.get<User[]>(`${this.url}/linked/${adminId}`);
+    }
 }

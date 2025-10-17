@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
     currentUser?: User
     selectedAdminId?: number
     success = false
-    failed = false
     linked = false
 
     constructor(
@@ -30,7 +29,6 @@ export class HomeComponent implements OnInit {
     }
 
     link() {
-        console.log('Current user:', this.currentUser)
         if(!this.currentUser || !this.selectedAdminId) return
 
         if (this.currentUser.adminId) {
@@ -44,7 +42,6 @@ export class HomeComponent implements OnInit {
                 alert('Linked successfully')
             },
             error: err => {
-                this.failed = true
                 console.error(err)
             }
         })
