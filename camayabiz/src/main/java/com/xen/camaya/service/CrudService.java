@@ -8,5 +8,4 @@ public interface CrudService<T, ID> {
     T get(ID id);
     List<T> getAll();
     void delete(ID id);
-    boolean assign(Integer userId, Integer adminId);
 }

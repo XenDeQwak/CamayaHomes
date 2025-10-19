@@ -32,7 +32,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
         return transformUserServ.toModel(userData);
     }
 
-    @Override
     public boolean assign(Integer userId, Integer adminId) {
         UserData user = userRepository.findById(userId).orElse(null);
         UserData admin = userRepository.findById(adminId).orElse(null);
