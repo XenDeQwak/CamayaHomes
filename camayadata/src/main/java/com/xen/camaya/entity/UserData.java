@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name="UserTable")
 public class UserData {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
     String email;

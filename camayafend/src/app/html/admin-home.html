@@ -5,3 +5,12 @@
     {{ c.name }} ({{ c.email }})
   </li>
 </ul>
+
+<h1>ADD PROPERTY</h1>
+<input [(ngModel)]="newProperty.name" placeholder="Name" />
+<br>
+<input [(ngModel)]="newProperty.location" placeholder="Location" />
+<br>
+<input [(ngModel)]="newProperty.description" placeholder="Description" />
+<br>
+<button (click)="addProperty()">Signup</button>

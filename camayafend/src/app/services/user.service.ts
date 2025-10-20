@@ -16,12 +16,12 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'http://localhost:8080/api/users';
+  private url = 'http://localhost:8080/api/proxy/users';
   private currentUser?: User
   
   constructor(private http: HttpClient) {}
     
-  getUsers(): Observable<User[]> {
+    getUsers(): Observable<User[]> {
       return this.http.get<User[]>(this.url);
     }
 

@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name="PropertyTable")
 public class PropertyData {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
     String location;

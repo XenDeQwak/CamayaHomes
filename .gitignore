@@ -36,3 +36,29 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# ===== Java / Spring Boot =====
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+
+# Spring Boot config and secrets
+application-dev.properties
+application-prod.properties
+application-local.properties
+application.yml
+application-dev.yml
+application-prod.yml
+application-local.yml
+*.env
+.env
+
+# ===== Angular / Frontend =====
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.angular/cache/
+/frontend/.angular/
