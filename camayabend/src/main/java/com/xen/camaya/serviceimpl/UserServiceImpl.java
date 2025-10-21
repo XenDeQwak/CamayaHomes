@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.xen.camaya.entity.PropertyData;
 import com.xen.camaya.entity.UserData;
 import com.xen.camaya.model.UserModel;
+import com.xen.camaya.repository.PropertyRepository;
 import com.xen.camaya.repository.UserRepository;
 import com.xen.camaya.service.UserService;
 import com.xen.camaya.transform.TransformUserServ;
@@ -15,10 +17,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
 
     private final TransformUserServ transformUserServ;
     private final UserRepository userRepository;
+    private final PropertyRepository propertyRepository;
 
-    public UserServiceImpl(UserRepository userRepository, TransformUserServ transformUserServ) {
+    public UserServiceImpl(UserRepository userRepository, 
+                        TransformUserServ transformUserServ,
+                        PropertyRepository propertyRepository) {
         super(userRepository);
         this.userRepository = userRepository;
+        this.propertyRepository = propertyRepository;
         this.transformUserServ = transformUserServ;
     }
 
@@ -50,6 +56,17 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
             .stream()
             .map(transformUserServ::toModel)
             .toList();
+    }
+
+    public boolean assignPropertyToCustomer(Integer propertyId, Integer customerId) {
+        UserData user = userRepository.findById(customerId).orElse(null);
+        PropertyData property = propertyRepository.findById(propertyId).orElse(null);
+
+        if (user == null || property == null) return false;
+
+        user.setLinkedProperty(propertyId);
+        userRepository.save(user);
+        return true;
     }
 
 

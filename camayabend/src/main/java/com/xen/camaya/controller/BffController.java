@@ -38,9 +38,16 @@ public class BffController {
         return restTemplate.postForEntity(internalUrl, null, String.class);
     }
 
-    @GetMapping("/users/linked/{adminId}")
+    @PostMapping("/users/{propertyId}/linked/{userId}")
+    public ResponseEntity<?> assignProperty(@PathVariable Integer propertyId, @PathVariable Integer userId) {
+        String internalUrl = "http://localhost:8080/internal/users/" + propertyId + "/linked/" + userId;
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(internalUrl, null, String.class);
+    }
+
+    @GetMapping("/users/link/{adminId}")
     public ResponseEntity<?> getLinkedCustomers(@PathVariable Integer adminId) {
-        String internalUrl = "http://localhost:8080/internal/users/linked/" + adminId;
+        String internalUrl = "http://localhost:8080/internal/users/link/" + adminId;
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForEntity(internalUrl, Object.class);
     }

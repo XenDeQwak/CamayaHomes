@@ -10,4 +10,5 @@ public class UserModel {
     String password;
     String role;
     Integer adminId;
+    Integer linkedProperty;
 }

@@ -65,6 +65,10 @@ export class UserService {
     }
 
     getLinkedCustomers(adminId: number): Observable<User[]> {
-      return this.http.get<User[]>(`${this.url}/linked/${adminId}`);
+      return this.http.get<User[]>(`${this.url}/link/${adminId}`);
+    }
+
+    linkProperty(propertyId: number | undefined, userId: number | undefined): Observable<any> {
+        return this.http.post(`${this.url}/${propertyId}/linked/${userId}`, {})
     }
 }

@@ -29,7 +29,4 @@ public class PropertyServiceImpl extends BaseServiceImpl<PropertyModel, Property
     protected PropertyModel toModel(PropertyData propertyData) {
         return transformPropertyServ.toModel(propertyData);
     }
-
-    
-
 }

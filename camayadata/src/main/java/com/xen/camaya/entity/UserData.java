@@ -20,4 +20,5 @@ public class UserData {
     String password;
     String role;
     Integer adminId;
+    Integer linkedProperty;
 }

@@ -11,8 +11,11 @@ import { FormsModule } from "@angular/forms";
     imports: [CommonModule, FormsModule ]
 })
 export class AdminHomeComponent implements OnInit {
-    linkedCustomers: User[] = []
+    customers: User[] = []
+    properties: Property[] = []
     currentUser?: User
+    selectedUserId?: number
+    selectedPropertyId?: number
 
     newProperty: Property = {
         id: 0,
@@ -32,9 +35,10 @@ export class AdminHomeComponent implements OnInit {
         const currentUser = this.userService.getCurrentUser();
         if (currentUser?.role === 'admin' && currentUser.id) {
             this.userService.getLinkedCustomers(currentUser.id).subscribe(data => {
-            this.linkedCustomers = data;
+            this.customers = data;
             });
         }
+        this.propertyService.getProperties().subscribe(data => this.properties = data)
     }
 
     addProperty() {
@@ -45,6 +49,14 @@ export class AdminHomeComponent implements OnInit {
             error: () => {
                 this.failed = true
             }
+        })
+    }
+
+    linkProperty() {
+        if(!this.selectedUserId || !this.selectedPropertyId) return
+        this.userService.linkProperty(this.selectedPropertyId, this.selectedUserId).subscribe({
+            next: () => alert("User linked successfully"),
+            error: err => console.error(err)
         })
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xen.camaya.model.UserModel;
 import com.xen.camaya.service.CrudService;
+import com.xen.camaya.service.PropertyService;
 import com.xen.camaya.service.UserService;
 
 @RestController
@@ -46,11 +47,22 @@ public class UserController extends BaseController<UserModel, Integer> {
         }
     }
 
-    @GetMapping("/linked/{adminId}")
+    @GetMapping("/link/{adminId}")
     public ResponseEntity<?> getLinkedCustomers(@PathVariable Integer adminId) {
         try {
             List<UserModel> linked = userService.getLinkedCustomers(adminId);
             return ResponseEntity.ok(linked);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/{propertyId}/linked/{userId}")
+    public ResponseEntity<?> assignProperty(@PathVariable Integer propertyId, @PathVariable Integer userId) {
+        try {
+            boolean success = userService.assignPropertyToCustomer(propertyId, userId);
+            if(success) return ResponseEntity.ok().build();
+            else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

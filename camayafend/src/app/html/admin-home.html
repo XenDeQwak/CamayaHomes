@@ -1,7 +1,7 @@
 <h1>YOU ARE AT ADMIN NOW</h1>
 <h2>Your Linked Customers</h2>
 <ul>
-  <li *ngFor="let c of linkedCustomers">
+  <li *ngFor="let c of customers">
     {{ c.name }} ({{ c.email }})
   </li>
 </ul>
@@ -14,3 +14,21 @@
 <input [(ngModel)]="newProperty.description" placeholder="Description" />
 <br>
 <button (click)="addProperty()">Signup</button>
+
+<h1>LINK CUSTOMER TO PROPERTY</h1>
+
+<h2>Available Users</h2>
+<select [(ngModel)]="selectedUserId">
+  <option *ngFor="let user of customers" [value]="user.id">
+    {{ user.name }}
+  </option>
+</select>
+
+<h2>Available Properties</h2>
+<select [(ngModel)]="selectedPropertyId">
+  <option *ngFor="let property of properties" [value]="property.id">
+    {{ property.name }}
+  </option>
+</select>
+
+<button (click)="linkProperty()">Link Property to User</button>
