@@ -16,7 +16,7 @@ export class SignupComponent {
         name: '',
         email: '',
         password: '',
-        role: ''
+        role: 'customer'
     }
     success = false;
     failed = false;

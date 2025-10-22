@@ -21,8 +21,11 @@ export class AdminHomeComponent implements OnInit {
         id: 0,
         name: '',
         location: '',
-        description: ''
+        description: '',
+        price: 0,
+        isBought: false
     }
+    
     success = false;
     failed = false;
 
@@ -38,7 +41,6 @@ export class AdminHomeComponent implements OnInit {
             this.customers = data;
             });
         }
-        this.propertyService.getProperties().subscribe(data => this.properties = data)
     }
 
     addProperty() {
@@ -49,14 +51,6 @@ export class AdminHomeComponent implements OnInit {
             error: () => {
                 this.failed = true
             }
-        })
-    }
-
-    linkProperty() {
-        if(!this.selectedUserId || !this.selectedPropertyId) return
-        this.userService.linkProperty(this.selectedPropertyId, this.selectedUserId).subscribe({
-            next: () => alert("User linked successfully"),
-            error: err => console.error(err)
         })
     }
 

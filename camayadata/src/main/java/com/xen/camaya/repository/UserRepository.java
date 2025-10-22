@@ -11,4 +11,5 @@ import com.xen.camaya.entity.UserData;
 public interface UserRepository extends JpaRepository<UserData, Integer>{
     UserData findByEmailAndPassword(String email, String password);
     List<UserData> findByAdminId(Integer adminId);
+    boolean existsByLinkedProperty(Integer linkedProperty);
 }

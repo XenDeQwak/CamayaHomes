@@ -13,6 +13,8 @@
 <br>
 <input [(ngModel)]="newProperty.description" placeholder="Description" />
 <br>
+<input [(ngModel)]="newProperty.price" placeholder="Price" />
+<br>
 <button (click)="addProperty()">Signup</button>
 
 <h1>LINK CUSTOMER TO PROPERTY</h1>
@@ -23,12 +25,3 @@
     {{ user.name }}
   </option>
 </select>
-
-<h2>Available Properties</h2>
-<select [(ngModel)]="selectedPropertyId">
-  <option *ngFor="let property of properties" [value]="property.id">
-    {{ property.name }}
-  </option>
-</select>
-
-<button (click)="linkProperty()">Link Property to User</button>

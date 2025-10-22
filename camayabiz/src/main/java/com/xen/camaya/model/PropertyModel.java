@@ -8,4 +8,6 @@ public class PropertyModel {
     String name;
     String location;
     String description;
+    double price;
+    boolean isBought;
 }

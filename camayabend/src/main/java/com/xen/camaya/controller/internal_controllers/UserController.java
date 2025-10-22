@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xen.camaya.model.UserModel;
 import com.xen.camaya.service.CrudService;
-import com.xen.camaya.service.PropertyService;
 import com.xen.camaya.service.UserService;
 
 @RestController
@@ -61,8 +60,8 @@ public class UserController extends BaseController<UserModel, Integer> {
     public ResponseEntity<?> assignProperty(@PathVariable Integer propertyId, @PathVariable Integer userId) {
         try {
             boolean success = userService.assignPropertyToCustomer(propertyId, userId);
-            if(success) return ResponseEntity.ok().build();
-            else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
+            if (success) return ResponseEntity.ok().build();
+            else return ResponseEntity.status(HttpStatus.CONFLICT).body("Property already linked to someone else");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

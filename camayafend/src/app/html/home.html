@@ -8,3 +8,12 @@
 <button (click)="link()">Link to this Admin</button>
 <p *ngIf="success">Linked successfully</p>
 <p *ngIf="linked">Already linked. Can't link anymore</p>
+
+<h2>Available Properties</h2>
+<select [(ngModel)]="selectedPropertyId">
+  <option *ngFor="let property of properties" [value]="property.id">
+    {{ property.name }}
+  </option>
+</select>
+
+<button (click)="linkProperty()">Link Property to User</button>

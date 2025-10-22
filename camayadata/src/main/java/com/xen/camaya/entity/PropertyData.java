@@ -18,4 +18,6 @@ public class PropertyData {
     String name;
     String location;
     String description;
+    double price;
+    boolean isBought;
 }

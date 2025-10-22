@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { User, UserService } from "../services/user.service";
+import { Property, PropertyService } from "../services/property.service";
 
 @Component({
     selector: 'app-home',
@@ -12,13 +13,16 @@ import { User, UserService } from "../services/user.service";
 })
 export class HomeComponent implements OnInit {
     users: User[] = []
+    properties: Property[] = []
     currentUser?: User
+    selectedPropertyId?: number
     selectedAdminId?: number
     success = false
     linked = false
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        private propertyService: PropertyService
     ) {}
 
     ngOnInit() {
@@ -26,6 +30,7 @@ export class HomeComponent implements OnInit {
             this.users = data.filter(u => u.role === "admin"))
             
         this.currentUser = this.userService.getCurrentUser()
+        this.propertyService.getProperties().subscribe(data => this.properties = data)
     }
 
     link() {
@@ -44,6 +49,14 @@ export class HomeComponent implements OnInit {
             error: err => {
                 console.error(err)
             }
+        })
+    }
+
+    linkProperty() {
+        if(!this.currentUser?.id || !this.selectedPropertyId) return
+        this.userService.linkProperty(this.selectedPropertyId, this.currentUser?.id).subscribe({
+            next: () => alert("User linked successfully"),
+            error: err => console.error(err)
         })
     }
 

@@ -5,9 +5,7 @@
 <br>
 <input [(ngModel)]="newUser.password" type="password" placeholder="Password" />
 <br>
-<input [(ngModel)]="newUser.role" type="text" placeholder="Role"/>
-<br>
-<button (click)="signup()">Signup</button>
+<a href ="/login"><button (click)="signup()">Signup</button></a>
 
 <p *ngIf="success">Signup successful!</p>
 <p *ngIf="failed">Signup failed. Try again.</p>

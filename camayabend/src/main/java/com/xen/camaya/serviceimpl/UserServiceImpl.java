@@ -62,7 +62,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
         UserData user = userRepository.findById(customerId).orElse(null);
         PropertyData property = propertyRepository.findById(propertyId).orElse(null);
 
-        if (user == null || property == null) return false;
+
+        if ((user == null || property == null)) return false;
+
 
         user.setLinkedProperty(propertyId);
         userRepository.save(user);

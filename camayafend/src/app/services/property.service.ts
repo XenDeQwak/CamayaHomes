@@ -7,6 +7,8 @@ export interface Property {
     name: string
     location: string
     description: string
+    price: number
+    isBought: boolean
 }
 
 @Injectable({

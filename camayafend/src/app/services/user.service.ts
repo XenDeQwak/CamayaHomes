@@ -9,6 +9,7 @@ export interface User {
   password: string
   role: string
   adminId?: number
+  linkedProperty?: number
 }
 
 
