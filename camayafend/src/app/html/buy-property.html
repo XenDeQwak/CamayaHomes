@@ -1,0 +1,7 @@
+<h2>Available Properties</h2>
+<select [(ngModel)]="selectedPropertyId">
+  <option *ngFor="let property of properties" [value]="property.id">
+    {{ property.name }}
+  </option>
+</select>
+<button click="buyProperty()">Buy Property</button>

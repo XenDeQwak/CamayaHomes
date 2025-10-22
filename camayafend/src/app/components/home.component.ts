@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
     users: User[] = []
     properties: Property[] = []
     currentUser?: User
-    selectedPropertyId?: number
     selectedAdminId?: number
     success = false
     linked = false
@@ -49,14 +48,6 @@ export class HomeComponent implements OnInit {
             error: err => {
                 console.error(err)
             }
-        })
-    }
-
-    linkProperty() {
-        if(!this.currentUser?.id || !this.selectedPropertyId) return
-        this.userService.linkProperty(this.selectedPropertyId, this.currentUser?.id).subscribe({
-            next: () => alert("User linked successfully"),
-            error: err => console.error(err)
         })
     }
 
