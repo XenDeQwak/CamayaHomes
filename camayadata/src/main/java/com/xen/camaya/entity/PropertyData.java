@@ -20,4 +20,5 @@ public class PropertyData {
     String description;
     double price;
     boolean isBought;
+    Integer linkedUser;
 }

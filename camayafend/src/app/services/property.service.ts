@@ -9,6 +9,7 @@ export interface Property {
     description: string
     price: number
     isBought: boolean
+    linkedUser?: number
 }
 
 @Injectable({

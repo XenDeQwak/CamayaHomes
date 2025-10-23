@@ -67,7 +67,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
 
 
         user.setLinkedProperty(propertyId);
+        property.setLinkedUser(customerId);
         userRepository.save(user);
+        propertyRepository.save(property);
         return true;
     }
 

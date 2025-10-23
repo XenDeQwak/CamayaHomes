@@ -25,6 +25,8 @@ export class BuyPropertyComponent implements OnInit {
     ngOnInit() {
         this.propertyService.getProperties().subscribe(data => this.properties = data)
         this.currentUser = this.userService.getCurrentUser()
+        this.userService.getUsers().subscribe(users => this.users = users)
+
     }
 
     buyProperty() {

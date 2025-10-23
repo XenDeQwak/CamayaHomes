@@ -10,4 +10,5 @@ public class PropertyModel {
     String description;
     double price;
     boolean isBought;
+    Integer linkedUser;
 }

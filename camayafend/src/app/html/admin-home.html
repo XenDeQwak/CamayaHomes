@@ -16,12 +16,3 @@
 <input [(ngModel)]="newProperty.price" placeholder="Price" />
 <br>
 <button (click)="addProperty()">Signup</button>
-
-<h1>LINK CUSTOMER TO PROPERTY</h1>
-
-<h2>Available Users</h2>
-<select [(ngModel)]="selectedUserId">
-  <option *ngFor="let user of customers" [value]="user.id">
-    {{ user.name }}
-  </option>
-</select>
