@@ -1,11 +1,17 @@
 <h2>Signup</h2>
+
 <input [(ngModel)]="newUser.name" placeholder="Name" />
+<p *ngIf="newUser.name && (newUser.name.trim().length < 8)">Name must be at least 8 characters long.</p>
 <br>
 <input [(ngModel)]="newUser.email" placeholder="Email" />
+<p *ngIf="isInvalidEmail()">Invalid email format.</p>
+
 <br>
 <input [(ngModel)]="newUser.password" type="password" placeholder="Password" />
+<p *ngIf="newUser.password && newUser.password.length < 8">Password must be at least 8 characters long. </p>
 <br>
-<a href ="/login"><button (click)="signup()">Signup</button></a>
+
+<button (click)="signup()" [disabled]="!isFormValid()">Signup</button>
 
 <p *ngIf="success">Signup successful!</p>
 <p *ngIf="failed">Signup failed. Try again.</p>

@@ -35,4 +35,20 @@ export class SignupComponent {
             }
         });
     }
+
+    isFormValid(): boolean {
+        return (
+            this.newUser.name?.trim().length >= 2 &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.newUser.email || '') &&
+            (this.newUser.password?.length || 0) >= 8
+        )
+    }
+
+    isInvalidEmail(): boolean {
+        if (!this.newUser.email) return false
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return !pattern.test(this.newUser.email)
+    }
+
+
 }

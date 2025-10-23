@@ -30,19 +30,15 @@ export class HomeComponent implements OnInit {
             
         this.currentUser = this.userService.getCurrentUser()
         this.propertyService.getProperties().subscribe(data => this.properties = data)
+        if (this.currentUser?.adminId) this.linked = true
     }
 
     link() {
         if(!this.currentUser || !this.selectedAdminId) return
-
-        if (this.currentUser.adminId) {
-            alert("Already linked to an admin")
-            return
-        }
-
         this.userService.linkToAdmin(this.currentUser?.id, this.selectedAdminId).subscribe({
             next: () => {
                 this.success = true
+                this.linked = true
                 alert('Linked successfully')
             },
             error: err => {

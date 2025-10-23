@@ -1,12 +1,17 @@
 <h2>Available Admins</h2>
+
+<ng-container *ngIf="!linked; else alreadyLinked">
   <select [(ngModel)]="selectedAdminId">
     <option *ngFor="let admin of users" [value]="admin.id">
       {{ admin.name }}
     </option>
   </select>
+  <button (click)="link()">Link to this Admin</button>
+</ng-container>
 
-<button (click)="link()">Link to this Admin</button>
+<ng-template #alreadyLinked>
+  <p>Already linked. Can't link anymore</p>
+</ng-template>
+
 <p *ngIf="success">Linked successfully</p>
-<p *ngIf="linked">Already linked. Can't link anymore</p>
-
 <a href="/buy"><button>Buy Property</button></a>

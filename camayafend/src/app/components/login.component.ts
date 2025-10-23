@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common'
   selector: 'app-login',
   standalone: true,
   templateUrl: '../html/login.html',
-  styleUrl: '../css/login.component.css',
+  styleUrl: '../css/login.css',
   imports: [CommonModule, FormsModule]
 })
 export class LoginComponent implements OnInit {
