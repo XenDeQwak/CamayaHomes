@@ -29,9 +29,9 @@ export class BuyPropertyComponent implements OnInit {
 
     }
 
-    buyProperty() {
-        if(!this.currentUser?.id || !this.selectedPropertyId) return
-        this.userService.linkProperty(this.selectedPropertyId, this.currentUser?.id).subscribe({
+    buyProperty(propertyId?: number) {
+        if(!this.currentUser?.id) return
+        this.userService.linkProperty(propertyId, this.currentUser?.id).subscribe({
             next: () => alert("User linked successfully"),
             error: err => console.error(err)
         })

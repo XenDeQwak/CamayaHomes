@@ -8,6 +8,7 @@ import { Property, PropertyService } from "../services/property.service";
     selector: 'app-home',
     templateUrl: '../html/home.html',
     standalone: true,
+    styleUrl: '../css/home.css',
     imports: [CommonModule, FormsModule]
     
 })

@@ -1,9 +1,14 @@
-<h2>Login</h2>
-<input type="email" [(ngModel)]="email" placeholder="Email">
-<br>
-<input type="password" [(ngModel)]="password" placeholder="Password">
-<button (click)="login()">Login</button>
+<div class="login-container">
+  <h2>Login</h2>
 
-<p *ngIf="!loginSuccess && loginAttempted">Invalid email or password</p>
-<br>
-<a href="/signup">Go to Signup</a>
+  <input type="email" [(ngModel)]="email" placeholder="Email" class="input-field" />
+  <input type="password" [(ngModel)]="password" placeholder="Password" class="input-field" />
+  
+  <button (click)="login()" class="login-button">Login</button>
+
+  <p *ngIf="!loginSuccess && loginAttempted" class="error-msg">
+    Invalid email or password
+  </p>
+
+  <a href="/signup" class="signup-link">Go to Signup</a>
+</div>

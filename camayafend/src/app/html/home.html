@@ -1,17 +1,57 @@
-<h2>Available Admins</h2>
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4 gradient-bg">
+  <a class="navbar-brand fw-bold" href="/home">Camaya</a>
 
-<ng-container *ngIf="!linked; else alreadyLinked">
-  <select [(ngModel)]="selectedAdminId">
-    <option *ngFor="let admin of users" [value]="admin.id">
-      {{ admin.name }}
-    </option>
-  </select>
-  <button (click)="link()">Link to this Admin</button>
-</ng-container>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<ng-template #alreadyLinked>
-  <p>Already linked. Can't link anymore</p>
-</ng-template>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="/buy">Buy Property</a></li>
+      <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
 
-<p *ngIf="success">Linked successfully</p>
-<a href="/buy"><button>Buy Property</button></a>
+<div class="top-section gradient-bg text-white text-center py-5">
+  <br>
+  <br>
+  <h1>Discover Camaya Coast</h1>
+  <p>Where pristine beaches meet adventure and luxury</p>
+  <a href="/buy"><button class="buy-button">Explore Paradise</button></a>
+</div>
+
+<div class="wave-container">
+  <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="waveGradient" gradientTransform="rotate(0)">
+        <stop offset="0%" stop-color="#0cc0df" />
+        <stop offset="100%" stop-color="#ffde59" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#waveGradient)" d="M0,160L48,170.7C96,181,192,203,288,202.7C384,203,480,181,576,165.3C672,149,768,139,864,149.3C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L0,320Z"></path>
+  </svg>
+</div>
+
+<div class="bottom-section py-5">
+  <h1>Lorem Ipsum</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+
+  <div class="bottom-boxes">
+    <div class="bottom-box">
+      <h2>Lorem</h2>
+      <p>Lorem Ipsum</p>
+    </div>
+    <div class="bottom-box">
+      <h2>Lorem</h2>
+      <p>Lorem Ipsum</p>
+    </div>
+    <div class="bottom-box">
+      <h2>Lorem</h2>
+      <p>Lorem Ipsum</p>
+    </div>
+  </div>
+</div>
+
+
