@@ -8,7 +8,7 @@ export interface Property {
     location: string
     description: string
     price: number
-    isBought: boolean
+    bought: boolean
     linkedUser?: number
 }
 

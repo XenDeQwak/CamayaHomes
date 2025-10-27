@@ -1,16 +1,41 @@
-<div class="properties-container">
-  <div 
-    *ngFor="let property of properties"
-    class="property-card"
-    [class.linked]="property.linkedUser">
-    
-    <h3>{{ property.name }}</h3>
-    <p>{{ property.description }}</p>
-    <p><strong>Price:</strong> {{ property.price | currency:'PHP' }}</p>
-    <button 
-      (click)="buyProperty(property.id)" 
-      [disabled]="property.linkedUser">
-      {{ property.linkedUser ? 'Already Bought' : 'Buy Property' }}
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4 gradient-bg">
+    <a class="navbar-brand fw-bold" href="/home">Camaya</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
     </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/buy">Buy Property</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="buy-property-container">
+  <div class="page-header">
+    <h1>Browse Properties</h1>
+    <p>Find your dream beachfront property</p>
+  </div>
+  
+  <div class="properties-grid">
+    <div class="property-card" *ngFor="let property of properties">
+      <div class="property-badge">Featured</div>
+      <div class="property-image">🏡</div>
+      <div class="property-content">
+        <h3 class="property-title">{{property.name}}</h3>
+        <p class="property-location">{{property.location}}</p>
+        <p class="property-description">{{property.description}}</p>
+        <div class="property-price">₱{{property.price}}</div>
+        <button 
+          class="buy-button" 
+          (click)="buyProperty(property.id)" 
+          [disabled]="property.bought || !currentUser">
+          {{ property.bought ? 'Sold Out' : 'Buy Now' }}
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -23,7 +23,7 @@ export class AdminHomeComponent implements OnInit {
         location: '',
         description: '',
         price: 0,
-        isBought: false
+        bought: false
     }
     
     success = false;
