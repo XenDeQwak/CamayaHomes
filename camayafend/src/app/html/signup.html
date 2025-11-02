@@ -9,7 +9,9 @@
 <br>
 <input [(ngModel)]="newUser.password" type="password" placeholder="Password" />
 <p *ngIf="newUser.password && newUser.password.length < 8">Password must be at least 8 characters long. </p>
+
 <br>
+<input [(ngModel)]="newUser.role"/>
 
 <button (click)="signup()" [disabled]="!isFormValid()">Signup</button>
 

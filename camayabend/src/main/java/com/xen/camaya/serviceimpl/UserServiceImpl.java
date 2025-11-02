@@ -2,6 +2,8 @@ package com.xen.camaya.serviceimpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.xen.camaya.entity.PropertyData;
@@ -58,21 +60,24 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, UserData, Intege
             .toList();
     }
 
-    public boolean assignPropertyToCustomer(Integer propertyId, Integer customerId) {
-        UserData user = userRepository.findById(customerId).orElse(null);
-        PropertyData property = propertyRepository.findById(propertyId).orElse(null);
+   @Transactional
+    public void assignPropertyToCustomer(int propertyId, int userId) {
+        UserData user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
+        PropertyData property = propertyRepository.findById(propertyId)
+            .orElseThrow(() -> new RuntimeException("Property not found"));
 
-        if ((user == null || property == null)) return false;
-
-
-        user.setLinkedProperty(propertyId);
-        property.setLinkedUser(customerId);
-        property.setBought(true);
-        userRepository.save(user);
-        propertyRepository.save(property);
-        return true;
+        if (!user.getLinkedProperties().contains(property)) {
+            user.getLinkedProperties().add(property);
+            property.getLinkedUsers().add(user);
+            property.setBought(true);
+            propertyRepository.save(property);
+            userRepository.save(user);
+        }
     }
+
+
 
 
     

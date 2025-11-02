@@ -1,16 +1,16 @@
 package com.xen.camaya.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="UserTable")
+@Table(name = "UserTable")
+@ToString(exclude = "linkedProperties")
 public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,8 @@ public class UserData {
     String password;
     String role;
     Integer adminId;
-    Integer linkedProperty;
+
+    @ManyToMany(mappedBy = "linkedUsers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    List<PropertyData> linkedProperties = new ArrayList<>();
 }

@@ -1,5 +1,7 @@
 package com.xen.camaya.model;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -10,5 +12,5 @@ public class UserModel {
     String password;
     String role;
     Integer adminId;
-    Integer linkedProperty;
+    List<Integer> linkedProperties;
 }

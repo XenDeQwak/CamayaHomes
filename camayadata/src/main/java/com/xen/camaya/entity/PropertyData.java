@@ -1,16 +1,16 @@
 package com.xen.camaya.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="PropertyTable")
+@Table(name = "PropertyTable")
+@ToString(exclude = "linkedUsers")
 public class PropertyData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,13 @@ public class PropertyData {
     String description;
     double price;
     boolean isBought;
-    Integer linkedUser;
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_property_link",
+        joinColumns = @JoinColumn(name = "property_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnore
+    List<UserData> linkedUsers = new ArrayList<>();
 }

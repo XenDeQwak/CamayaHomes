@@ -59,9 +59,8 @@ public class UserController extends BaseController<UserModel, Integer> {
     @PostMapping("/{propertyId}/linked/{userId}")
     public ResponseEntity<?> assignProperty(@PathVariable Integer propertyId, @PathVariable Integer userId) {
         try {
-            boolean success = userService.assignPropertyToCustomer(propertyId, userId);
-            if (success) return ResponseEntity.ok().build();
-            else return ResponseEntity.status(HttpStatus.CONFLICT).body("Property already linked to someone else");
+            userService.assignPropertyToCustomer(propertyId, userId);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
