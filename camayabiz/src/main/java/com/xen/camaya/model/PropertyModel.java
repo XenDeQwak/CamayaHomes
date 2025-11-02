@@ -1,5 +1,7 @@
 package com.xen.camaya.model;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class PropertyModel {
     double price;
     boolean isBought;
     Integer linkedUser;
+    List<PropertyImageModel> images;
 }

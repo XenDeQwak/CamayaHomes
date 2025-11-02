@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4 gradient-bg">
-  <a class="navbar-brand fw-bold" routerLink="/home">Camaya</a>
+  <a class="navbar-brand fw-bold" href="/home">Camaya</a>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
@@ -7,20 +7,19 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" routerLink="/buy">Buy Property</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/about">About Us</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/contact">Contact Us</a></li>
-      <li *ngIf="currentUser" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-          {{ currentUser.name }}
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="buyDropdown" role="button" data-bs-toggle="dropdown">
+          Buy Property
         </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+        <ul class="dropdown-menu" aria-labelledby="buyDropdown">
+          <li><a class="dropdown-item" href="/buy">Browse Properties</a></li>
+          <li><a class="dropdown-item" href="/reserved">My Reserved Properties</a></li>
         </ul>
       </li>
-      <li *ngIf="!currentUser" class="nav-item">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
+
+      <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
     </ul>
   </div>
 </nav>
@@ -30,23 +29,25 @@
     <h1>Browse Properties</h1>
     <p>Find your dream beachfront property</p>
   </div>
-  
+
   <div *ngIf="!properties?.length" class="text-center mt-5 text-muted">
     <p>No properties available at the moment.</p>
   </div>
 
-  <div class="properties-grid">
+    <div class="properties-grid">
     <div class="property-card" *ngFor="let property of properties">
       <div *ngIf="property.bought" class="property-badge sold">Reserved</div>
       <div *ngIf="!property.bought" class="property-badge available">Available</div>
-      
 
       <div class="property-content">
         <h3 class="property-title">{{ property.name }}</h3>
-        <p class="property-location">📍 {{ property.location }}</p>
+        <p class="property-location">{{ property.location }}</p>
         <p class="property-description">{{ property.description }}</p>
         <div class="property-price">₱{{ property.price | number }}</div>
 
+        <button class="view-button" (click)="openCarousel(property)">
+          View Images
+        </button>
         <button
           class="buy-button"
           (click)="buyProperty(property.id)"
@@ -57,3 +58,31 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="propertyModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedProperty?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <div *ngFor="let img of selectedProperty?.images; let i = index" [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+              <img [src]="getImageUrl(img.url)" class="d-block w-100" alt="property image">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

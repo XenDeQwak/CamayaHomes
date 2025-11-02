@@ -1,9 +1,18 @@
 package com.xen.camaya.controller;
 
 import java.util.List;
+
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+
 import com.xen.camaya.model.UserModel;
 import com.xen.camaya.model.PropertyModel;
 import com.xen.camaya.service.UserService;
@@ -61,4 +70,39 @@ public class BffController {
     public PropertyModel createProperty(@RequestBody PropertyModel property) {
         return propertyService.create(property);
     }
+
+    @PostMapping("/properties/{id}/upload")
+    public ResponseEntity<?> uploadImage(
+            @PathVariable int id,
+            @RequestParam("file") List<MultipartFile> files) {
+        try {
+            String internalUrl = "http://localhost:8080/internal/property/" + id + "/upload";
+            RestTemplate restTemplate = new RestTemplate();
+
+            LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+            for (MultipartFile file : files) {
+                body.add("file", new ByteArrayResource(file.getBytes()) {
+                    @Override
+                    public String getFilename() {
+                        return file.getOriginalFilename();
+                    }
+                });
+            }
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+            HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity =
+                    new HttpEntity<>(body, headers);
+
+            return restTemplate.postForEntity(internalUrl, requestEntity, String.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("File upload proxy failed: " + e.getMessage());
+        }
+    }
+
+
+
 }

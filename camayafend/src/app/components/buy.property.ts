@@ -4,6 +4,8 @@ import { Property, PropertyService } from '../services/property.service';
 import { FormsModule } from '@angular/forms';
 import { User, UserService } from '../services/user.service';
 
+declare var bootstrap: any
+
 @Component({
     selector: 'app-buyproperty',
     templateUrl: '../html/buy-property.html',
@@ -16,6 +18,7 @@ export class BuyPropertyComponent implements OnInit {
     properties: Property[] = []
     selectedPropertyId?: number
     currentUser?: User
+    selectedProperty?: Property
     users: User[] = []
 
     constructor(
@@ -58,5 +61,16 @@ export class BuyPropertyComponent implements OnInit {
             }
         })
     }
+
+    openCarousel(property: Property) {
+        this.selectedProperty = property;
+        const modal = new bootstrap.Modal(document.getElementById('propertyModal'));
+        modal.show();
+    }
+
+    getImageUrl(url: string) {
+        return url.startsWith('http') ? url : 'http://localhost:8080' + url
+    }
+
 
 }

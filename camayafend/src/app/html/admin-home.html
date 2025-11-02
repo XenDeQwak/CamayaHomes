@@ -1,4 +1,5 @@
 <h1>YOU ARE AT ADMIN NOW</h1>
+
 <h2>Your Linked Customers</h2>
 <ul>
   <li *ngFor="let c of customers">
@@ -13,6 +14,16 @@
 <br>
 <input [(ngModel)]="newProperty.description" placeholder="Description" />
 <br>
-<input [(ngModel)]="newProperty.price" placeholder="Price" />
+<input [(ngModel)]="newProperty.price" placeholder="Price" type="number" />
 <br>
-<button (click)="addProperty()">Signup</button>
+<button (click)="addProperty()">Add Property</button>
+
+<h2>Upload Property Images</h2>
+<select [(ngModel)]="selectedPropertyId">
+  <option [ngValue]="null">Select a property</option>
+  <option *ngFor="let p of properties" [ngValue]="p.id">{{ p.name }}</option>
+</select>
+<br>
+<input type="file" (change)="onFileChange($event)" multiple [disabled]="!selectedPropertyId" />
+<br>
+<button (click)="uploadImages()" [disabled]="!selectedPropertyId || !selectedFiles">Upload Images</button>

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -29,4 +31,9 @@ public class PropertyData {
     )
     @JsonIgnore
     List<UserData> linkedUsers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    List<PropertyImageData> images = new ArrayList<>();
+
 }
