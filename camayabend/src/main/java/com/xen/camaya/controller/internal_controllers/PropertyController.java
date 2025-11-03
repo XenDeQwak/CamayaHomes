@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,5 +72,20 @@ public class PropertyController extends BaseController<PropertyModel, Integer> {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Upload failed");
         }
     }
+
+    @GetMapping("/reserved/{userId}")
+    public ResponseEntity<?> getReservedProperties(@PathVariable int userId) {
+        List<PropertyData> reservedProperties = propertyRepository.findAll()
+            .stream()
+            .filter(property -> property.getLinkedUsers()
+                .stream()
+                .anyMatch(user -> user.getId() == userId))
+            .toList();
+
+        return ResponseEntity.ok(reservedProperties);
+    }
+
+
+
 }
 

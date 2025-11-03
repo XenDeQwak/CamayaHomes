@@ -1,14 +1,21 @@
-<div class="login-container">
-  <h2>Login</h2>
+<div class="login-page">
+  <div class="login-header">
+    <h1 class="brand-title">Camaya Coast</h1>
+    <p class="brand-subtitle">Your Gateway to Paradise</p>
+  </div>
 
-  <input type="email" [(ngModel)]="email" placeholder="Email" class="input-field" />
-  <input type="password" [(ngModel)]="password" placeholder="Password" class="input-field" />
-  
-  <button (click)="login()" class="login-button">Login</button>
+  <div class="login-container">
+    <h2>Login</h2>
 
-  <p *ngIf="!loginSuccess && loginAttempted" class="error-msg">
-    Invalid email or password
-  </p>
+    <input type="email" [(ngModel)]="email" placeholder="Email" class="input-field" />
+    <input type="password" [(ngModel)]="password" placeholder="Password" class="input-field" />
 
-  <a href="/signup" class="signup-link">Go to Signup</a>
+    <button (click)="login()" class="login-button">Login</button>
+
+    <p *ngIf="!loginSuccess && loginAttempted" class="error-msg">
+      Invalid email or password
+    </p>
+
+    <a href="/signup" class="signup-link">Go to Signup</a>
+  </div>
 </div>

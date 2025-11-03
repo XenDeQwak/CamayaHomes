@@ -55,4 +55,9 @@ export class PropertyService {
     return this.http.post(`${this.url}/${propertyId}/upload`, formData);
     }
 
+    getReservedByUser(userId: number): Observable<Property[]> {
+        return this.http.get<Property[]>(`${this.url}/reserved/${userId}`);
+    }
+
+
 }

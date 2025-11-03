@@ -1,16 +1,30 @@
-<h2>Signup</h2>
+<div class="signup-page">
+  <div class="brand">
+    <h1 class="brand-title">Camaya Coast</h1>
+    <p class="brand-subtitle">Create your account</p>
+  </div>
 
-<input [(ngModel)]="newUser.name" placeholder="Name" />
-<p *ngIf="newUser.name && (newUser.name.trim().length < 8)">Name must be at least 8 characters long.</p>
-<br>
-<input [(ngModel)]="newUser.email" placeholder="Email" />
-<p *ngIf="isInvalidEmail()">Invalid email format.</p>
+  <div class="signup-container">
+    <h2>Signup</h2>
 
-<br>
-<input [(ngModel)]="newUser.password" type="password" placeholder="Password" />
-<p *ngIf="newUser.password && newUser.password.length < 8">Password must be at least 8 characters long. </p>
+    <input [(ngModel)]="newUser.name" placeholder="Name" class="input-field" />
+    <p *ngIf="newUser.name && (newUser.name.trim().length < 8)" class="error">
+      Name must be at least 8 characters long.
+    </p>
 
-<button (click)="signup()" [disabled]="!isFormValid()">Signup</button>
+    <input [(ngModel)]="newUser.email" placeholder="Email" class="input-field" />
+    <p *ngIf="isInvalidEmail()" class="error">Invalid email format.</p>
 
-<p *ngIf="success">Signup successful!</p>
-<p *ngIf="failed">Signup failed. Try again.</p>
+    <input [(ngModel)]="newUser.password" type="password" placeholder="Password" class="input-field" />
+    <p *ngIf="newUser.password && newUser.password.length < 8" class="error">
+      Password must be at least 8 characters long.
+    </p>
+
+    <button (click)="signup()" [disabled]="!isFormValid()">Signup</button>
+
+    <p *ngIf="success" class="success">Signup successful!</p>
+    <p *ngIf="failed" class="error">Signup failed. Try again.</p>
+
+    <a href="/login" class="back-link">← Back to Login</a>
+  </div>
+</div>

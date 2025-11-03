@@ -6,6 +6,7 @@ import { UserService, User } from '../services/user.service';
 @Component({
     selector: 'app-signup',
     templateUrl: '../html/signup.html',
+    styleUrl: '../css/signup.css',
     standalone: true,
     imports: [CommonModule, FormsModule]
     

@@ -103,6 +103,15 @@ public class BffController {
         }
     }
 
+    @GetMapping("/properties/reserved/{userId}")
+    public ResponseEntity<?> getReservedProperties(@PathVariable int userId) {
+        String internalUrl = "http://localhost:8080/internal/property/reserved/" + userId;
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForEntity(internalUrl, Object.class);
+    }
+
+
+
 
 
 }

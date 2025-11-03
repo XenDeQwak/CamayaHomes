@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4 gradient-bg">
+  <a class="navbar-brand fw-bold" href="/home">Camaya</a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="buyDropdown" role="button" data-bs-toggle="dropdown">
+          Buy Property
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="buyDropdown">
+          <li><a class="dropdown-item" href="/buy">Browse Properties</a></li>
+          <li><a class="dropdown-item" href="/reserved">My Reserved Properties</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="reserved-list">
+  <h2>My Reserved Properties</h2>
+
+  <div *ngIf="!reservedProperties?.length" class="reserved-empty">
+    <p>You haven’t reserved any properties yet.</p>
+  </div>
+
+  <div class="reserved-grid" *ngIf="reservedProperties?.length">
+    <div class="property-card" *ngFor="let property of reservedProperties">
+      <h3>{{ property.name }}</h3>
+      <p>📍 {{ property.location }}</p>
+      <p>{{ property.description }}</p>
+      <p>₱{{ property.price | number }}</p>
+
+      <div class="images">
+        <img *ngFor="let img of property.images" [src]="getImageUrl(img.url)" alt="property image" />
+      </div>
+    </div>
+  </div>
+</div>

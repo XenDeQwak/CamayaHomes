@@ -1,0 +1,124 @@
+.signup-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fafc, #dff8ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.signup-container {
+  width: 380px;
+  padding: 35px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  color: #333;
+  animation: fadeUp 1s ease;
+}
+
+.signup-container h2 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #0a4b68;
+  font-size: 28px;
+}
+
+.input-field {
+  width: 85%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #d0dfe5;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f8fafc;
+  color: #333;
+  transition: all 0.3s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #0cc0df;
+  box-shadow: 0 0 6px rgba(12, 192, 223, 0.3);
+  background: #ffffff;
+}
+
+button {
+  width: 90%;
+  padding: 12px;
+  background: linear-gradient(90deg, #0cc0df, #ffde59);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(12, 192, 223, 0.3);
+}
+
+button:disabled {
+  background: #b2e8f2;
+  cursor: not-allowed;
+}
+
+p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+p.error {
+  color: #c0392b;
+}
+
+p.success {
+  color: #27ae60;
+}
+
+.signup-page .brand {
+  margin-bottom: 30px;
+  text-align: center;
+  animation: fadeDown 1s ease;
+}
+
+.brand-title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0a4b68;
+}
+
+.brand-subtitle {
+  font-size: 15px;
+  color: #3d7a89;
+  opacity: 0.9;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #0cc0df;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #ffde59;
+  text-decoration: underline;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

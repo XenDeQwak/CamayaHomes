@@ -1,17 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4 gradient-bg">
-    <a class="navbar-brand fw-bold" href="/home">Camaya</a>
+  <a class="navbar-brand fw-bold" href="/home">Camaya</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/buy">Buy Property</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="buyDropdown" role="button" data-bs-toggle="dropdown">
+          Buy Property
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="buyDropdown">
+          <li><a class="dropdown-item" href="/buy">Browse Properties</a></li>
+          <li><a class="dropdown-item" href="/reserved">My Reserved Properties</a></li>
         </ul>
-    </div>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="/home#about">About Us</a></li>
+      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="top-section gradient-bg text-white text-center py-5">
@@ -68,7 +76,7 @@
         </div>
     </div>
 
-    <div class="property-showcase">
+    <div class="property-showcase about">
         <div class="showcase-left">
             <h2>Your Dream Property Awaits</h2>
             <p>Discover exclusive beachfront lots and residential units with unparalleled access to world-class amenities. Each property is thoughtfully designed to maximize your coastal living experience.</p>

@@ -11,7 +11,7 @@ body {
 .gradient-bg {
     background: linear-gradient(to right, #0cc0df, #ffde59);
     position: relative;
-    overflow: hidden;
+    overflow: visible !important;
 }
 
 .gradient-bg::before {
@@ -95,6 +95,53 @@ body {
     text-decoration: none;
     position: relative;
     transition: all 0.3s ease;
+}
+
+.navbar .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(to right, #0cc0df, #ffde59);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    z-index: 2000;
+}
+
+.navbar .dropdown-item {
+    color: white;
+    font-weight: 500;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar .dropdown-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.navbar .dropdown-item:hover::after {
+    width: 60%;
+}
+
+.navbar .dropdown-toggle::after {
+    border-top-color: white;
+    margin-left: 0.4rem;
 }
 
 .navbar-nav .nav-link::after {
@@ -573,6 +620,11 @@ body {
     background: linear-gradient(to right, #1a1a1a, #333);
     letter-spacing: 1px;
 }
+
+.navbar-nav .nav-item.dropdown .nav-link::after {
+    display: none !important;
+}
+
 
 @media (max-width: 968px) {
     .property-showcase {

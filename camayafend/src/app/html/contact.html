@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4 gradient-bg">
+  <a class="navbar-brand fw-bold" href="/home">Camaya</a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="buyDropdown" role="button" data-bs-toggle="dropdown">
+          Buy Property
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="buyDropdown">
+          <li><a class="dropdown-item" href="/buy">Browse Properties</a></li>
+          <li><a class="dropdown-item" href="/reserved">My Reserved Properties</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+      <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="contacts-container">
+  <div class="page-header">
+    <h1>Get in Touch</h1>
+    <p>Connect with our team for personalized assistance</p>
+  </div>
+
+  <div class="contact-card-center">
+    <div class="contact-icon">📞</div>
+    <h2>Connect with Our Agent</h2>
+    <p>Get expert guidance on property selection, financing options, and more. Our dedicated agent is here to help you find your perfect beachfront property.</p>
+    <div *ngFor="let user of users">
+      <div *ngIf="user.role.toLowerCase() !== 'admin'">
+        <button class="link-button" (click)="linkToAdmin(user.id)">Link to {{ selectedAdmin?.name }}</button>
+      </div>
+    </div>
+</div>
