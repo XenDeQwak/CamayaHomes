@@ -8,6 +8,7 @@ import { FormsModule } from "@angular/forms";
   selector: 'app-admin-home',
   standalone: true,
   templateUrl: '../html/admin-home.html',
+  styleUrl: '../css/admin-home.css',
   imports: [CommonModule, FormsModule]
 })
 export class AdminHomeComponent implements OnInit {
