@@ -19,7 +19,7 @@ export class AdminHomeComponent implements OnInit {
   selectedPropertyId?: number;
   files: FileList | null = null;
   selectedProperty: any = null;
-  selectedFiles: File[] = [];
+  selectedFiles?: FileList
 
   newProperty: Property = {
     id: 0,
@@ -64,7 +64,8 @@ export class AdminHomeComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    this.files = event.target.files;
+    const files = event.target.files
+    this.selectedFiles = files && files.length > 0 ? files : undefined
   }
 
   uploadImages() {

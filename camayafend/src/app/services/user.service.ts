@@ -52,13 +52,22 @@ export class UserService {
     }
 
     getCurrentUser(): User | undefined {
-      if (this.currentUser) return this.currentUser
+      if (this.currentUser) return this.currentUser;
       if (typeof window !== 'undefined' && window.localStorage) {
-        const stored = localStorage.getItem('user')
-        return stored ? JSON.parse(stored): undefined
+        const stored = localStorage.getItem('user');
+        if (stored) {
+          try {
+            this.currentUser = JSON.parse(stored);
+            return this.currentUser;
+          } catch {
+            localStorage.removeItem('user');
+          }
+        }
       }
-      return undefined
+      return undefined;
     }
+
+
 
     clearCurrentUser() {
       this.currentUser = undefined

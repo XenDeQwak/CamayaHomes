@@ -4,7 +4,6 @@
     <span class="admin-badge">👑 Administrator</span>
   </div>
 
-  <!-- Customers Section -->
   <div class="admin-section">
     <h2>Your Linked Customers</h2>
     <ul class="customer-list" *ngIf="customers?.length; else noCustomers">
@@ -96,8 +95,8 @@
           [class.disabled]="!selectedPropertyId">
           📁 Choose Files
         </label>
-        <div class="file-info" *ngIf="selectedFiles">
-          {{ selectedFiles.length }} file(s) selected
+        <div class="file-info">
+          {{ selectedFiles?.length  || 0 }} file(s) selected
         </div>
       </div>
     </div>
